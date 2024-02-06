@@ -9,4 +9,4 @@
 - [ ] [jotai](https://jotai.org)
 - [ ] [jotai-tanstack-query](https://github.com/jotaijs/jotai-tanstack-query)
 - [ ] [jotai-uncontrolled](https://github.com/jotaijs/jotai-uncontrolled)
-  - https://zenn.dev/dai_shi/articles/01813b22907dcf
+  - [Document](https://zenn.dev/dai_shi/articles/01813b22907dcf)
