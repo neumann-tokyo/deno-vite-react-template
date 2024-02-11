@@ -1,7 +1,7 @@
 {
 	"tasks": {
 		"vite": "deno run -A npm:vite@4.5.0 -- --config ./vite.config.mts",
-		"dev": "deno task vite .",
+		"dev": "deno task vite -p 5555 .",
 		"build": "deno task vite build . ",
 		"preview": "deno task vite preview .",
 		"optimize": "deno task vite optimize ."

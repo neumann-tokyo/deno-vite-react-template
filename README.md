@@ -5,7 +5,7 @@
 - [x] [vite-deno-plugin](https://github.com/anatoo/vite-deno-plugin)
 - [x] React
 - [x] [wouter](https://github.com/molefrog/wouter)
-- [ ] [Kuma UI](https://www.kuma-ui.com)
+- [ ] [Chakra UI](https://chakra-ui.com)
 - [ ] [jotai](https://jotai.org)
 - [ ] [jotai-tanstack-query](https://github.com/jotaijs/jotai-tanstack-query)
 - [ ] [jotai-uncontrolled](https://github.com/jotaijs/jotai-uncontrolled)

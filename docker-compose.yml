@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    command: tail -f /dev/null
+    volumes:
+      - .:/home/alice/web
+    ports:
+      - "5555:5173"
