@@ -2,6 +2,7 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "npm:@types/node": "npm:@types/node@18.16.19",
       "npm:@vitejs/plugin-react": "npm:@vitejs/plugin-react@4.2.1_vite@4.5.0_@babel+core@7.23.9",
       "npm:vite@3.2.4": "npm:vite@3.2.4",
       "npm:vite@4.5.0": "npm:vite@4.5.0"
@@ -342,6 +343,10 @@
         "dependencies": {
           "@babel/types": "@babel/types@7.23.9"
         }
+      },
+      "@types/node@18.16.19": {
+        "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
+        "dependencies": {}
       },
       "@vitejs/plugin-react@4.2.1_vite@4.5.0_@babel+core@7.23.9": {
         "integrity": "sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==",
@@ -708,6 +713,9 @@
     "https://deno.land/std/path/mod.ts": "https://deno.land/std@0.215.0/path/mod.ts",
     "https://deno.land/x/vite_deno_plugin/mod.ts": "https://deno.land/x/vite_deno_plugin@v0.9.3/mod.ts",
     "https://esm.sh/v128/@types/react@~18.2/jsx-runtime~.d.ts": "https://esm.sh/v128/@types/react@18.2.38/jsx-runtime~.d.ts",
+    "https://esm.sh/v135/@types/js-cookie@~3.0/index.d.ts": "https://esm.sh/v135/@types/js-cookie@3.0.6/index.d.ts",
+    "https://esm.sh/v135/@types/lodash@4.14.202/index": "https://esm.sh/v135/@types/lodash@4.14.202/index~.d.ts",
+    "https://esm.sh/v135/@types/qs@^6/index.d.ts": "https://esm.sh/v135/@types/qs@6.9.11/index.d.ts",
     "https://esm.sh/v135/@types/react-dom@~18.2/client~.d.ts": "https://esm.sh/v135/@types/react-dom@18.2.19/client~.d.ts"
   },
   "remote": {

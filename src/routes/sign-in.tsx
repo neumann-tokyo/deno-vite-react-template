@@ -10,9 +10,13 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import { useAtom } from "jotai";
+import { atom, useAtom } from "jotai";
+import { atomEffect } from "jotai-effect";
 import { atomWithMutation } from "jotai-tanstack-query";
 import { httpPost } from "../libs/http-client.ts";
+import { When } from "react-if";
+import { currentUserAtom, jwtTokenAtom } from "../atoms/current-user.ts";
+import Cookies from "js-cookie";
 
 const signInPostAtom = atomWithMutation(() => ({
   mutationKey: ["sign-in"],
@@ -25,9 +29,21 @@ const signInPostAtom = atomWithMutation(() => ({
     return await res.json();
   },
 }));
+const onSuccessSignInEffect = atomEffect((get, set) => {
+  const { isSuccess, data } = get(signInPostAtom);
+  if (isSuccess) {
+    Cookies.set("moshimoshi-jwt-token", data.token);
+    set(jwtTokenAtom, data.token);
+    set(currentUserAtom, data.user);
+  }
+});
 
 export function SignInPage() {
-  const [{ mutate, status, isLoading }] = useAtom(signInPostAtom);
+  const [{ mutate, isPending, isError }] = useAtom(
+    signInPostAtom,
+  );
+  useAtom(onSuccessSignInEffect);
+
   const onSubmit = (e: any) => {
     e.preventDefault();
     mutate({
@@ -70,7 +86,12 @@ export function SignInPage() {
                     required={true}
                   />
                 </FormControl>
-                <Button type="submit" colorScheme="blue">Sign In</Button>
+                <When condition={isError}>
+                  <Text color="tomato">Failed to sign in</Text>
+                </When>
+                <Button type="submit" colorScheme="blue" isLoading={isPending}>
+                  Sign In
+                </Button>
               </Flex>
             </form>
           </CardBody>
