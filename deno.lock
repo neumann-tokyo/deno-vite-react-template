@@ -707,7 +707,8 @@
   "redirects": {
     "https://deno.land/std/path/mod.ts": "https://deno.land/std@0.215.0/path/mod.ts",
     "https://deno.land/x/vite_deno_plugin/mod.ts": "https://deno.land/x/vite_deno_plugin@v0.9.3/mod.ts",
-    "https://esm.sh/v128/@types/react@~18.2/jsx-runtime~.d.ts": "https://esm.sh/v128/@types/react@18.2.38/jsx-runtime~.d.ts"
+    "https://esm.sh/v128/@types/react@~18.2/jsx-runtime~.d.ts": "https://esm.sh/v128/@types/react@18.2.38/jsx-runtime~.d.ts",
+    "https://esm.sh/v135/@types/react-dom@~18.2/client~.d.ts": "https://esm.sh/v135/@types/react-dom@18.2.19/client~.d.ts"
   },
   "remote": {
     "https://deno.land/std@0.204.0/assert/assert.ts": "9a97dad6d98c238938e7540736b826440ad8c1c1e54430ca4c4e623e585607ee",

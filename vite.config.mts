@@ -8,7 +8,7 @@ const __dirname = dirname(new URL(import.meta.url).pathname);
 export default defineConfig({
   plugins: [
     viteDeno({
-      importMapFilename: __dirname + "/deno.json",
+      importMapFilename: __dirname + "/deno.jsonc",
     }),
     react({
       jsxImportSource: "react",

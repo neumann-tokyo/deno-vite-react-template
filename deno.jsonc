@@ -11,7 +11,15 @@
     "react/": "https://esm.sh/react@18.2.0/",
     "react-dom": "https://esm.sh/react-dom@18.2.0",
     "react-dom/": "https://esm.sh/react-dom@18.2.0/",
-    "wouter": "https://esm.sh/wouter@2.12.0"
+    "wouter": "https://esm.sh/wouter@3.0.0",
+    "@chakra-ui/react": "https://esm.sh/@chakra-ui/react@2.8.2",
+    "@chakra-ui/react/": "https://esm.sh/@chakra-ui/react@2.8.2/",
+    "@emotion/react": "https://esm.sh/@emotion/react@11.11.3",
+    "@emotion/react/": "https://esm.sh/@emotion/react@11.11.3/",
+    "@emotion/styled": "https://esm.sh/@emotion/styled@11.11.3",
+    "@emotion/styled/": "https://esm.sh/@emotion/styled@11.11.3/",
+    "framer-motion": "https://esm.sh/framer-motion@11.0.3",
+    "framer-motion/": "https://esm.sh/framer-motion@11.0.3/"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
