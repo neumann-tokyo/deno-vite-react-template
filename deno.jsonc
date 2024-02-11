@@ -19,12 +19,25 @@
     "@emotion/styled": "https://esm.sh/@emotion/styled@11.11.3",
     "@emotion/styled/": "https://esm.sh/@emotion/styled@11.11.3/",
     "framer-motion": "https://esm.sh/framer-motion@11.0.3",
-    "framer-motion/": "https://esm.sh/framer-motion@11.0.3/"
+    "framer-motion/": "https://esm.sh/framer-motion@11.0.3/",
+    "jotai": "https://esm.sh/jotai@2.6.4",
+    "jotai/": "https://esm.sh/jotai@2.6.4/",
+    "js-cookie": "https://esm.sh/js-cookie@3.0.5",
+    "react-if": "https://esm.sh/react-if@4.1.5",
+    "jotai-tanstack-query": "https://esm.sh/jotai-tanstack-query@0.8.5",
+    "@tanstack/query-core": "https://esm.sh/@tanstack/query-core@5.20.1",
+    "wonka": "https://esm.sh/wonka@6.3.4",
+    "qs": "https://esm.sh/qs@6.11.2"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "lib": ["dom", "deno.ns"],
     "types": ["vite/client"]
+  },
+  "lint": {
+    "rules": {
+      "exclude": ["no-explicit-any"]
+    }
   }
 }
