@@ -1,10 +1,10 @@
-import { Routes } from "./routes.tsx";
 import { ChakraProvider } from "@chakra-ui/react";
+import { Layout } from "./layout.tsx";
 
 export function App() {
   return (
     <ChakraProvider>
-      <Routes />
+      <Layout />
     </ChakraProvider>
   );
 }
