@@ -1,0 +1,10 @@
+#!/bin/bash
+
+TARGET=$(git diff-index --cached --name-only HEAD | grep -e *.tsx -e *.ts -e *.js -e *.jsx -e *.md -e *.json -e *.jsonc)
+
+if [ -n $TARGET  ]; then
+  deno fmt $TARGET && deno lint $TARGET && git update-index --again
+  echo "DONE format and lint!"
+else
+  echo "no target files"
+fi
