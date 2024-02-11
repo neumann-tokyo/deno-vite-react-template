@@ -14,4 +14,8 @@ export default defineConfig({
 			jsxImportSource: "react",
 		}),
 	],
+	server: {
+		host: "0.0.0.0",
+		port: 5555
+	}
 });

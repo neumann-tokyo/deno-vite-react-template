@@ -6,7 +6,6 @@
 	"postAttachCommand": "git config --global core.pager \"less -FX\"",
 	"shutdownAction": "stopCompose",
 	"initializeCommand": "ls",
-	"forwardPorts": ["5555:5555"],
 	"containerUser": "alice",
 	"customizations": {
 		"vscode": {
