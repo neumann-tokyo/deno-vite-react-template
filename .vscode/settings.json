@@ -1,4 +1,4 @@
 {
-	"deno.enablePaths": ["./"],
-	"deno.enable": true
+  "deno.enablePaths": ["./"],
+  "deno.enable": true
 }
