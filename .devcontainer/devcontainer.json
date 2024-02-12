@@ -68,7 +68,7 @@
         "[markdown]": {
           "editor.defaultFormatter": "denoland.vscode-deno"
         },
-        "workbench.colorTheme": "GitHub Dark Colorblind"
+        "workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
       }
     }
   }

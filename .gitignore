@@ -1,3 +1,4 @@
 dist
 .vite
 vite.config.mts.timestamp-*
+.vscode
