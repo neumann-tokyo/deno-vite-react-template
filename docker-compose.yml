@@ -8,7 +8,7 @@ services:
       - .:/home/alice/web
       - deno-dir-data:/home/alice/deno-dir
     ports:
-      - "5555:5555"
+      - "5544:5544"
 
 volumes:
   deno-dir-data:
