@@ -1,4 +1,4 @@
-# MoshiMoshi Web
+# Deno React Template
 
 ## Using Libraries
 

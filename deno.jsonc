@@ -1,44 +1,46 @@
 {
-  "tasks": {
-    "vite": "deno run -A npm:vite@4.5.0 -- --config ./vite.config.mts",
-    "dev": "deno task vite .",
-    "build": "deno task vite build . ",
-    "preview": "deno task vite preview .",
-    "optimize": "deno task vite optimize ."
-  },
-  "imports": {
-    "react": "https://esm.sh/react@18.2.0",
-    "react/": "https://esm.sh/react@18.2.0/",
-    "react-dom": "https://esm.sh/react-dom@18.2.0",
-    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
-    "wouter": "https://esm.sh/wouter@3.0.0",
-    "@chakra-ui/react": "https://esm.sh/@chakra-ui/react@2.8.2",
-    "@chakra-ui/react/": "https://esm.sh/@chakra-ui/react@2.8.2/",
-    "@emotion/react": "https://esm.sh/@emotion/react@11.11.3",
-    "@emotion/react/": "https://esm.sh/@emotion/react@11.11.3/",
-    "@emotion/styled": "https://esm.sh/@emotion/styled@11.11.3",
-    "@emotion/styled/": "https://esm.sh/@emotion/styled@11.11.3/",
-    "framer-motion": "https://esm.sh/framer-motion@11.0.3",
-    "framer-motion/": "https://esm.sh/framer-motion@11.0.3/",
-    "jotai": "https://esm.sh/jotai@2.6.4",
-    "jotai/": "https://esm.sh/jotai@2.6.4/",
-    "jotai-effect": "https://esm.sh/jotai-effect@0.5.0",
-    "js-cookie": "https://esm.sh/js-cookie@3.0.5",
-    "react-if": "https://esm.sh/react-if@4.1.5",
-    "jotai-tanstack-query": "https://esm.sh/jotai-tanstack-query@0.8.5",
-    "@tanstack/query-core": "https://esm.sh/@tanstack/query-core@5.20.1",
-    "wonka": "https://esm.sh/wonka@6.3.4",
-    "qs": "https://esm.sh/qs@6.11.2"
-  },
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "lib": ["dom", "deno.ns"],
-    "types": ["vite/client"]
-  },
-  "lint": {
-    "rules": {
-      "exclude": ["no-explicit-any"]
-    }
-  }
+	"tasks": {
+		"vite": "deno run -A npm:vite@4.5.0 -- --config ./vite.config.mts",
+		"dev": "deno task vite .",
+		"build": "deno task vite build .",
+		"preview": "deno task vite preview .",
+		"optimize": "deno task vite optimize .",
+		"check": "biome check --apply --no-errors-on-unmatched --files-ignore-unknown=true"
+	},
+	"imports": {
+		"react": "https://esm.sh/react@18.2.0",
+		"react/": "https://esm.sh/react@18.2.0/",
+		"react-dom": "https://esm.sh/react-dom@18.2.0",
+		"react-dom/": "https://esm.sh/react-dom@18.2.0/",
+		"wouter": "https://esm.sh/wouter@3.0.0",
+		"@chakra-ui/react": "https://esm.sh/@chakra-ui/react@2.8.2",
+		"@chakra-ui/react/": "https://esm.sh/@chakra-ui/react@2.8.2/",
+		"@emotion/react": "https://esm.sh/@emotion/react@11.11.3",
+		"@emotion/react/": "https://esm.sh/@emotion/react@11.11.3/",
+		"@emotion/styled": "https://esm.sh/@emotion/styled@11.11.3",
+		"@emotion/styled/": "https://esm.sh/@emotion/styled@11.11.3/",
+		"framer-motion": "https://esm.sh/framer-motion@11.0.3",
+		"framer-motion/": "https://esm.sh/framer-motion@11.0.3/",
+		"jotai": "https://esm.sh/jotai@2.6.4",
+		"jotai/": "https://esm.sh/jotai@2.6.4/",
+		"jotai-effect": "https://esm.sh/jotai-effect@0.5.0",
+		"js-cookie": "https://esm.sh/js-cookie@3.0.5",
+		"react-if": "https://esm.sh/react-if@4.1.5",
+		"jotai-tanstack-query": "https://esm.sh/jotai-tanstack-query@0.8.5",
+		"@tanstack/query-core": "https://esm.sh/@tanstack/query-core@5.20.1",
+		"wonka": "https://esm.sh/wonka@6.3.4",
+		"qs": "https://esm.sh/qs@6.11.2",
+		"ky": "https://esm.sh/ky@1.2.3"
+	},
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "react",
+		"lib": ["dom", "deno.ns"],
+		"types": ["vite/client"]
+	},
+	"lint": {
+		"rules": {
+			"exclude": ["no-explicit-any"]
+		}
+	}
 }

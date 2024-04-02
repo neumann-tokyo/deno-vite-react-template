@@ -1,75 +1,62 @@
 {
-  "name": "moshimoshi-web",
-  "dockerComposeFile": ["../docker-compose.yml"],
-  "service": "web",
-  "workspaceFolder": "/home/alice/web",
-  "postAttachCommand": "git config --global core.pager \"less -FX\" && cp -f /home/alice/web/.devcontainer/pre-commit /home/alice/web/.git/hooks/",
-  "shutdownAction": "stopCompose",
-  "initializeCommand": "ls",
-  "containerUser": "alice",
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "denoland.vscode-deno",
-        "wmaurer.change-case",
-        "sleistner.vscode-fileutils",
-        "usernamehw.errorlens",
-        "albymor.increment-selection",
-        "huizhou.githd",
-        "GitHub.github-vscode-theme",
-        "naumovs.color-highlight",
-        "GitHub.copilot"
-      ],
-      "settings": {
-        "deno.enable": true,
-        "deno.config": "/home/alice/web/deno.jsonc",
-        "deno.codeLens.implementations": true,
-        "deno.internalInspect": false,
-        "deno.path": "/usr/bin/deno",
-        "javascript.inlayHints.enumMemberValues.enabled": true,
-        "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-        "javascript.inlayHints.parameterNames.enabled": "all",
-        "javascript.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
-        "javascript.inlayHints.parameterTypes.enabled": true,
-        "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
-        "javascript.inlayHints.variableTypes.enabled": true,
-        "typescript.inlayHints.enumMemberValues.enabled": true,
-        "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-        "typescript.inlayHints.parameterNames.enabled": "all",
-        "typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
-        "typescript.inlayHints.parameterTypes.enabled": true,
-        "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
-        "typescript.inlayHints.variableTypes.enabled": true,
-        "editor.formatOnSave": true,
-        "editor.formatOnSaveMode": "file",
-        "files.insertFinalNewline": true,
-        "terminal.integrated.defaultProfile.linux": "bash",
-        "terminal.integrated.profiles.linux": {
-          "bash": { "path": "/bin/bash" }
-        },
-        "[javascript]": {
-          "editor.defaultFormatter": "denoland.vscode-deno"
-        },
-        "[typescript]": {
-          "editor.defaultFormatter": "denoland.vscode-deno"
-        },
-        "[javascriptreact]": {
-          "editor.defaultFormatter": "denoland.vscode-deno"
-        },
-        "[typescriptreact]": {
-          "editor.defaultFormatter": "denoland.vscode-deno"
-        },
-        "[json]": {
-          "editor.defaultFormatter": "denoland.vscode-deno"
-        },
-        "[jsonc]": {
-          "editor.defaultFormatter": "denoland.vscode-deno"
-        },
-        "[markdown]": {
-          "editor.defaultFormatter": "denoland.vscode-deno"
-        },
-        "workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
-      }
-    }
-  }
+	"name": "web",
+	"dockerComposeFile": ["../docker-compose.yml"],
+	"service": "web",
+	"workspaceFolder": "/home/alice/web",
+	"postAttachCommand": "git config --global core.pager \"less -FX\" && cp -f /home/alice/web/.devcontainer/pre-commit /home/alice/web/.git/hooks/ && sudo chown -R alice:alice /home/alice/",
+	"shutdownAction": "stopCompose",
+	"initializeCommand": "ls",
+	"containerUser": "alice",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"denoland.vscode-deno",
+				"wmaurer.change-case",
+				"sleistner.vscode-fileutils",
+				"usernamehw.errorlens",
+				"albymor.increment-selection",
+				"huizhou.githd",
+				"GitHub.github-vscode-theme",
+				"naumovs.color-highlight",
+				"GitHub.copilot",
+				"biomejs.biome"
+			],
+			"settings": {
+				"deno.enable": true,
+				"deno.config": "/home/alice/web/deno.jsonc",
+				"deno.codeLens.implementations": true,
+				"deno.internalInspect": false,
+				"deno.path": "/usr/bin/deno",
+				"editor.formatOnSave": true,
+				"editor.formatOnSaveMode": "file",
+				"files.insertFinalNewline": true,
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"terminal.integrated.profiles.linux": {
+					"bash": { "path": "/bin/bash" }
+				},
+				"[javascript]": {
+					"editor.defaultFormatter": "biomejs.biome"
+				},
+				"[typescript]": {
+					"editor.defaultFormatter": "biomejs.biome"
+				},
+				"[javascriptreact]": {
+					"editor.defaultFormatter": "biomejs.biome"
+				},
+				"[typescriptreact]": {
+					"editor.defaultFormatter": "biomejs.biome"
+				},
+				"[json]": {
+					"editor.defaultFormatter": "biomejs.biome"
+				},
+				"[jsonc]": {
+					"editor.defaultFormatter": "biomejs.biome"
+				},
+				"[markdown]": {
+					"editor.defaultFormatter": "denoland.vscode-deno"
+				},
+				"workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
+			}
+		}
+	}
 }
