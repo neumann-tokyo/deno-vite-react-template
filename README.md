@@ -10,3 +10,5 @@
 - [x] [jotai-tanstack-query](https://github.com/jotaijs/jotai-tanstack-query)
 - [ ] [jotai-uncontrolled](https://github.com/jotaijs/jotai-uncontrolled)
   - [Document](https://zenn.dev/dai_shi/articles/01813b22907dcf)
+- [ ] [RPC化](https://zenn.dev/yusukebe/articles/a00721f8b3b92e)
+- [ ] ky を fetch に変更しても良いと思う
