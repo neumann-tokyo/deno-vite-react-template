@@ -22,23 +22,29 @@ const signInPostAtom = atomWithMutation(() => ({
 	mutationKey: ["sign-in"],
 	mutationFn: (data: { email: string; password: string }) =>
 		httpClient().post("users/sign-in", { json: data }).json(),
+	onSuccess: (res) => {
+		console.log(res);
+	},
+	onError: (res) => {
+		console.log(res);
+	},
 }));
-const onSuccessSignInEffect = atomEffect((get, set) => {
-	const { isSuccess, data } = get(signInPostAtom);
+// const onSuccessSignInEffect = atomEffect((get, set) => {
+// 	const { isSuccess, data } = get(signInPostAtom);
 
-	console.log("isSuccess:", isSuccess);
-	console.log("data:", data);
+// 	console.log("isSuccess:", isSuccess);
+// 	console.log("data:", data);
 
-	// if (isSuccess) {
-	// 	Cookies.set("jwt-token", data.token);
-	// 	set(jwtTokenAtom, data.token);
-	// 	set(currentUserAtom, data.user);
-	// }
-});
+// 	// if (isSuccess) {
+// 	// 	Cookies.set("jwt-token", data.token);
+// 	// 	set(jwtTokenAtom, data.token);
+// 	// 	set(currentUserAtom, data.user);
+// 	// }
+// });
 
 export function SignInPage() {
 	const [{ mutate, isPending, isError }] = useAtom(signInPostAtom);
-	useAtom(onSuccessSignInEffect);
+	// useAtom(onSuccessSignInEffect);
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
