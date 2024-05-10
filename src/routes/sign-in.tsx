@@ -17,8 +17,6 @@ import { When } from "react-if";
 import { currentUserAtom, jwtTokenAtom } from "../atoms/current-user.ts";
 import { httpClient } from "../libs/http-client.ts";
 
-// TODO RTC
-
 const signInPostAtom = atomWithMutation(() => ({
 	mutationKey: ["sign-in"],
 	mutationFn: (data: { email: string; password: string }) => {
@@ -35,10 +33,18 @@ export function SignInPage() {
 	useEffect(() => {
 		if (signInError === null) return;
 
-		if (!isPending && !error && data?.token) {
-			Cookies.set("jwt-token", data.token);
-			setJwtToken(data.token);
-			setCurrentUser(data?.user);
+		const {
+			token,
+			user,
+		}: {
+			token: string;
+			user: any;
+		} = data as any;
+
+		if (!isPending && !error && token) {
+			Cookies.set("jwt-token", token);
+			setJwtToken(token);
+			setCurrentUser(user);
 		} else {
 			console.error(error);
 			setSignInError(true);
