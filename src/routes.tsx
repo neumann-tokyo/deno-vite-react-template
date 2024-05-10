@@ -7,7 +7,7 @@ export function Routes() {
 	return (
 		<Switch>
 			<Route path="/" component={HomePage} />
-			<Route path="/about" compoent={AboutPage} />
+			<Route path="/about" component={AboutPage} />
 			<Route component={NotFoundPage} />
 		</Switch>
 	);
