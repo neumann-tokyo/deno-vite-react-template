@@ -9,7 +9,7 @@ import {
 	Input,
 	Text,
 } from "@chakra-ui/react";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { atomWithMutation } from "jotai-tanstack-query";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
@@ -27,19 +27,14 @@ const signInPostAtom = atomWithMutation(() => ({
 export function SignInPage() {
 	const [{ mutate, isPending, error, data }] = useAtom(signInPostAtom);
 	const [signInError, setSignInError] = useState<boolean | null>(null);
-	const [_, setJwtToken] = useAtom(jwtTokenAtom);
-	const [__, setCurrentUser] = useAtom(currentUserAtom);
+	const setJwtToken = useSetAtom(jwtTokenAtom);
+	const setCurrentUser = useSetAtom(currentUserAtom);
 
 	useEffect(() => {
 		if (signInError === null) return;
 
-		const {
-			token,
-			user,
-		}: {
-			token: string;
-			user: any;
-		} = data as any;
+		const token = (data as any)?.token;
+		const user = (data as any)?.user;
 
 		if (!isPending && !error && token) {
 			Cookies.set("jwt-token", token);
