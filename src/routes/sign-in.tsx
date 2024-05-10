@@ -31,12 +31,12 @@ export function SignInPage() {
 	const setCurrentUser = useSetAtom(currentUserAtom);
 
 	useEffect(() => {
-		if (signInError === null) return;
+		if (signInError === null || isPending) return;
 
 		const token = (data as any)?.token;
 		const user = (data as any)?.user;
 
-		if (!isPending && !error && token) {
+		if (!error && token) {
 			Cookies.set("jwt-token", token);
 			setJwtToken(token);
 			setCurrentUser(user);
