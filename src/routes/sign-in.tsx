@@ -9,42 +9,45 @@ import {
 	Input,
 	Text,
 } from "@chakra-ui/react";
-import { useAtom, useSetAtom } from "jotai";
+import { atom, useAtom } from "jotai";
+import { atomEffect } from "jotai-effect";
 import { atomWithMutation } from "jotai-tanstack-query";
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
 import { When } from "react-if";
 import { currentUserAtom, jwtTokenAtom } from "../atoms/current-user.ts";
 import { httpClient } from "../libs/http-client.ts";
 
+const signInErrorAtom = atom<boolean | null>(null);
 const signInPostAtom = atomWithMutation(() => ({
 	mutationKey: ["sign-in"],
 	mutationFn: (data: { email: string; password: string }) => {
 		return httpClient().post("users/sign-in", { json: data }).json();
 	},
 }));
+const signInEffect = atomEffect((get, set) => {
+	const { isPending, data, error } = get(signInPostAtom);
+	const signInError = get(signInErrorAtom);
+
+	if (signInError === null || isPending) {
+		return;
+	}
+
+	const token = (data as any)?.token;
+	const user = (data as any)?.user;
+	if (!error && token && user) {
+		Cookies.set("jwt-token", token);
+		set(jwtTokenAtom, token);
+		set(currentUserAtom, user);
+	} else {
+		console.error(error);
+		set(signInErrorAtom, true);
+	}
+});
 
 export function SignInPage() {
+	useAtom(signInEffect);
 	const [{ mutate, isPending, error, data }] = useAtom(signInPostAtom);
-	const [signInError, setSignInError] = useState<boolean | null>(null);
-	const setJwtToken = useSetAtom(jwtTokenAtom);
-	const setCurrentUser = useSetAtom(currentUserAtom);
-
-	useEffect(() => {
-		if (signInError === null || isPending) return;
-
-		const token = (data as any)?.token;
-		const user = (data as any)?.user;
-
-		if (!error && token) {
-			Cookies.set("jwt-token", token);
-			setJwtToken(token);
-			setCurrentUser(user);
-		} else {
-			console.error(error);
-			setSignInError(true);
-		}
-	}, [isPending, data, error, signInError, setJwtToken, setCurrentUser]);
+	const [signInError, setSignInError] = useAtom(signInErrorAtom);
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
