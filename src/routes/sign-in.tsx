@@ -5,49 +5,49 @@ import {
 	CardHeader,
 	Flex,
 	FormControl,
-	FormLabel,
 	Heading,
 	Input,
 	Text,
 } from "@chakra-ui/react";
-import { atom, useAtom } from "jotai";
-import { atomEffect } from "jotai-effect";
+import { useAtom } from "jotai";
 import { atomWithMutation } from "jotai-tanstack-query";
 import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import { When } from "react-if";
 import { currentUserAtom, jwtTokenAtom } from "../atoms/current-user.ts";
 import { httpClient } from "../libs/http-client.ts";
 
+// TODO RTC
+
 const signInPostAtom = atomWithMutation(() => ({
 	mutationKey: ["sign-in"],
-	mutationFn: (data: { email: string; password: string }) =>
-		httpClient().post("users/sign-in", { json: data }).json(),
-	onSuccess: (res) => {
-		console.log(res);
-	},
-	onError: (res) => {
-		console.log(res);
+	mutationFn: (data: { email: string; password: string }) => {
+		return httpClient().post("users/sign-in", { json: data }).json();
 	},
 }));
-// const onSuccessSignInEffect = atomEffect((get, set) => {
-// 	const { isSuccess, data } = get(signInPostAtom);
-
-// 	console.log("isSuccess:", isSuccess);
-// 	console.log("data:", data);
-
-// 	// if (isSuccess) {
-// 	// 	Cookies.set("jwt-token", data.token);
-// 	// 	set(jwtTokenAtom, data.token);
-// 	// 	set(currentUserAtom, data.user);
-// 	// }
-// });
 
 export function SignInPage() {
-	const [{ mutate, isPending, isError }] = useAtom(signInPostAtom);
-	// useAtom(onSuccessSignInEffect);
+	const [{ mutate, isPending, error, data }] = useAtom(signInPostAtom);
+	const [signInError, setSignInError] = useState<boolean | null>(null);
+	const [_, setJwtToken] = useAtom(jwtTokenAtom);
+	const [__, setCurrentUser] = useAtom(currentUserAtom);
+
+	useEffect(() => {
+		if (signInError === null) return;
+
+		if (!isPending && !error && data?.token) {
+			Cookies.set("jwt-token", data.token);
+			setJwtToken(data.token);
+			setCurrentUser(data?.user);
+		} else {
+			console.error(error);
+			setSignInError(true);
+		}
+	}, [isPending, data, error, signInError, setJwtToken, setCurrentUser]);
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
+		setSignInError(false);
 		mutate({
 			email: e.target.email?.value,
 			password: e.target.password?.value,
@@ -88,8 +88,8 @@ export function SignInPage() {
 										required={true}
 									/>
 								</FormControl>
-								<When condition={isError}>
-									<Text color="tomato">Failed to sign in</Text>
+								<When condition={signInError === true}>
+									<Text color="tomato">Invalid Email or Password</Text>
 								</When>
 								<Button type="submit" colorScheme="blue" isLoading={isPending}>
 									Sign In
