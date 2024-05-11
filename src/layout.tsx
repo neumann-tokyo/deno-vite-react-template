@@ -34,11 +34,11 @@ export function Layout() {
 				<Link as={WouterLink} to="/">
 					Home
 				</Link>
-				<Link as={WouterLink} to="/about">
-					About
-				</Link>
 				<Link as={WouterLink} to="/todos">
 					TODO List
+				</Link>
+				<Link as={WouterLink} to="/settings">
+					Settings
 				</Link>
 				<Link onClick={onSignOut}>Sign Out</Link>
 			</Flex>
