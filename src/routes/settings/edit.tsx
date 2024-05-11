@@ -10,6 +10,8 @@ import {
 import { useAtom } from "jotai";
 // import { useLocation } from "wouter";
 import { currentUserAtom } from "../../atoms/current-user.ts";
+import { LanguageSelect } from "./_components/language-select.tsx";
+import { TimezoneSelect } from "./_components/timezone-select.tsx";
 
 export function SettingsEditPage() {
 	const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
@@ -39,18 +41,16 @@ export function SettingsEditPage() {
 					</FormControl>
 					<FormControl>
 						<FormLabel>Language</FormLabel>
-						<Input
-							placeholder="language"
+						<LanguageSelect
 							name="language"
-							defaultValue={currentUser?.language}
+							defaultValue={currentUser?.language ?? "en_US"}
 						/>
 					</FormControl>
 					<FormControl>
 						<FormLabel>Timezone</FormLabel>
-						<Input
-							placeholder="timezone"
+						<TimezoneSelect
 							name="timezone"
-							defaultValue={currentUser?.timezone}
+							defaultValue={currentUser?.timezone ?? "Asia/Tokyo"}
 						/>
 					</FormControl>
 					<Box>
