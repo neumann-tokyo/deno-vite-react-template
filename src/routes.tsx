@@ -1,6 +1,7 @@
 import { Route, Switch } from "wouter";
 import { HomePage } from "./routes/home.tsx";
 import { NotFoundPage } from "./routes/not-found.tsx";
+import { SettingsEditPage } from "./routes/settings/edit.tsx";
 import { SettingsIndexPage } from "./routes/settings/index.tsx";
 import { TodosIdEditPage } from "./routes/todos/id/edit.tsx";
 import { TodosIdIndexPage } from "./routes/todos/id/index.tsx";
@@ -16,6 +17,7 @@ export function Routes() {
 			<Route path="/todos/:id" component={TodosIdIndexPage} />
 			<Route path="/todos/:id/edit" component={TodosIdEditPage} />
 			<Route path="/settings" component={SettingsIndexPage} />
+			<Route path="/settings/edit" component={SettingsEditPage} />
 			<Route component={NotFoundPage} />
 		</Switch>
 	);
