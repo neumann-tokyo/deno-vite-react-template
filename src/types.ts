@@ -4,6 +4,7 @@ export type User = {
 	id: number;
 	language: string;
 	timezone: string;
+	datetimeFormat: string;
 };
 
 export type LanguageMessage = {

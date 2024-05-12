@@ -19,6 +19,10 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 		value: "時間帯",
 	},
 	{
+		en: "Date Format",
+		value: "日付形式",
+	},
+	{
 		en: "Toggle Light",
 		value: "ライトモードに切り替え",
 	},

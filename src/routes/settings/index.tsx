@@ -14,6 +14,7 @@ import { useColorMode } from "@chakra-ui/react";
 import { useAtomValue } from "jotai";
 import { useLocation } from "wouter";
 import { currentUserAtom } from "../../atoms/current-user.ts";
+import { formatName } from "../../components/datetime-format.tsx";
 import { Trans } from "../../components/trans.tsx";
 
 export function SettingsIndexPage() {
@@ -55,6 +56,12 @@ export function SettingsIndexPage() {
 								<Trans>Timezone</Trans>
 							</Th>
 							<Td>{currentUser?.timezone}</Td>
+						</Tr>
+						<Tr>
+							<Th>
+								<Trans>Date Format</Trans>
+							</Th>
+							<Td>{formatName(currentUser?.datetimeFormat)}</Td>
 						</Tr>
 					</Tbody>
 				</Table>

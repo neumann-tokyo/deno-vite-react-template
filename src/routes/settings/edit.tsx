@@ -12,8 +12,10 @@ import { atomEffect } from "jotai-effect";
 import { atomWithMutation } from "jotai-tanstack-query";
 import { When } from "react-if";
 import { currentUserAtom, jwtTokenAtom } from "../../atoms/current-user.ts";
+import { datetimeFormats } from "../../components/datetime-format.tsx";
 import { ErrorAlert } from "../../components/error-alert.tsx";
 import { httpClient } from "../../libs/http-client.ts";
+import { DatetimeFormatSelect } from "./_components/datetime-format-select.tsx";
 import { LanguageSelect } from "./_components/language-select.tsx";
 import { TimezoneSelect } from "./_components/timezone-select.tsx";
 
@@ -109,6 +111,14 @@ export function SettingsEditPage() {
 						<TimezoneSelect
 							name="timezone"
 							defaultValue={currentUser?.timezone ?? "Asia/Tokyo"}
+							required
+						/>
+					</FormControl>
+					<FormControl>
+						<FormLabel>Date Format</FormLabel>
+						<DatetimeFormatSelect
+							name="datetimeFormat"
+							defaultValue={currentUser?.datetimeFormat ?? datetimeFormats[0]}
 							required
 						/>
 					</FormControl>

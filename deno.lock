@@ -629,7 +629,8 @@
   "redirects": {
     "https://deno.land/std/path/mod.ts": "https://deno.land/std@0.224.0/path/mod.ts",
     "https://deno.land/x/vite_deno_plugin/mod.ts": "https://deno.land/x/vite_deno_plugin@v0.9.4/mod.ts",
-    "https://esm.sh/v128/@types/react@~18.2/jsx-runtime~.d.ts": "https://esm.sh/v128/@types/react@18.2.38/jsx-runtime~.d.ts"
+    "https://esm.sh/v128/@types/react@~18.2/jsx-runtime~.d.ts": "https://esm.sh/v128/@types/react@18.2.38/jsx-runtime~.d.ts",
+    "https://esm.sh/v135/@types/js-cookie@~3.0/index.d.ts": "https://esm.sh/v135/@types/js-cookie@3.0.6/index.d.ts"
   },
   "remote": {
     "https://deno.land/std@0.130.0/fmt/colors.ts": "30455035d6d728394781c10755351742dd731e3db6771b1843f9b9e490104d37",
