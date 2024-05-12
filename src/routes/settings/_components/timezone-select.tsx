@@ -6,16 +6,13 @@ const languages = Intl.supportedValuesOf("timeZone").map((timezone) => ({
 	label: timezone,
 }));
 
-export function TimezoneSelect({
-	name,
-	defaultValue,
-}: { name: string; defaultValue: string }) {
+export function TimezoneSelect({ defaultValue, ...props }: any) {
 	const defaultTimezone = useMemo(
 		() => ({ value: defaultValue, label: defaultValue }),
 		[defaultValue],
 	);
 
 	return (
-		<Select options={languages} defaultValue={defaultTimezone} name={name} />
+		<Select options={languages} defaultValue={defaultTimezone} {...props} />
 	);
 }

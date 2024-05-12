@@ -5,12 +5,9 @@ const languages = [
 	{ value: "ja_JP", label: "Japanese" },
 ];
 
-export function LanguageSelect({
-	name,
-	defaultValue,
-}: { name: string; defaultValue: string }) {
+export function LanguageSelect(props: any) {
 	return (
-		<Select defaultValue={defaultValue} name={name}>
+		<Select {...props}>
 			{languages.map((language) => (
 				<option key={language.value} value={language.value}>
 					{language.label}

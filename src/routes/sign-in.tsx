@@ -46,7 +46,7 @@ const signInEffect = atomEffect((get, set) => {
 
 export function SignInPage() {
 	useAtom(signInEffect);
-	const [{ mutate, isPending, error, data }] = useAtom(signInPostAtom);
+	const [{ mutate, isPending }] = useAtom(signInPostAtom);
 	const [signInError, setSignInError] = useAtom(signInErrorAtom);
 
 	const onSubmit = (e: any) => {
