@@ -5,3 +5,8 @@ export type User = {
 	language: string;
 	timezone: string;
 };
+
+export type LanguageMessage = {
+	en: string;
+	value: string;
+};

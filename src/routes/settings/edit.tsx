@@ -17,8 +17,6 @@ import { httpClient } from "../../libs/http-client.ts";
 import { LanguageSelect } from "./_components/language-select.tsx";
 import { TimezoneSelect } from "./_components/timezone-select.tsx";
 
-// import { useLocation } from "wouter";
-
 const updateCurrentUserAtom = atomWithMutation((get) => ({
 	mutationKey: ["update-current-user"],
 	mutationFn: (data: {

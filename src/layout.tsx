@@ -5,6 +5,7 @@ import { atomWithQuery } from "jotai-tanstack-query";
 import Cookies from "js-cookie";
 import { Redirect, Link as WouterLink, useRoute } from "wouter";
 import { currentUserAtom, jwtTokenAtom } from "./atoms/current-user.ts";
+import { Trans } from "./components/trans.tsx";
 import { httpClient } from "./libs/http-client.ts";
 import { Routes } from "./routes.tsx";
 import { SignInPage } from "./routes/sign-in.tsx";
@@ -61,7 +62,7 @@ export function Layout() {
 					TODO List
 				</Link>
 				<Link as={WouterLink} to="/settings">
-					Settings
+					<Trans>Settings</Trans>
 				</Link>
 				<Link onClick={onSignOut}>Sign Out</Link>
 			</Flex>

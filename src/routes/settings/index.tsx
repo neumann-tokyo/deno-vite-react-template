@@ -14,6 +14,7 @@ import { useColorMode } from "@chakra-ui/react";
 import { useAtomValue } from "jotai";
 import { useLocation } from "wouter";
 import { currentUserAtom } from "../../atoms/current-user.ts";
+import { Trans } from "../../components/trans.tsx";
 
 export function SettingsIndexPage() {
 	const { colorMode, toggleColorMode } = useColorMode();
@@ -23,11 +24,11 @@ export function SettingsIndexPage() {
 	return (
 		<Flex flexDirection="column" gap="1rem">
 			<Heading as="h1" size="4xl">
-				Settings
+				<Trans>Settings</Trans>
 			</Heading>
 			<Box>
 				<Button colorScheme="blue" onClick={toggleColorMode}>
-					Toggle {colorMode === "light" ? "Dark" : "Light"}
+					<Trans>{`Toggle ${colorMode === "light" ? "Dark" : "Light"}`}</Trans>
 				</Button>
 			</Box>
 			<TableContainer>
@@ -38,15 +39,21 @@ export function SettingsIndexPage() {
 							<Td>{currentUser?.email}</Td>
 						</Tr>
 						<Tr>
-							<Th>Display Name</Th>
+							<Th>
+								<Trans>Display Name</Trans>
+							</Th>
 							<Td>{currentUser?.displayName}</Td>
 						</Tr>
 						<Tr>
-							<Th>Language</Th>
+							<Th>
+								<Trans>Language</Trans>
+							</Th>
 							<Td>{currentUser?.language}</Td>
 						</Tr>
 						<Tr>
-							<Th>Timezone</Th>
+							<Th>
+								<Trans>Timezone</Trans>
+							</Th>
 							<Td>{currentUser?.timezone}</Td>
 						</Tr>
 					</Tbody>
@@ -58,7 +65,7 @@ export function SettingsIndexPage() {
 					onClick={() => navigate("/settings/edit")}
 					type="button"
 				>
-					Edit Profile
+					<Trans>Edit Profile</Trans>
 				</Button>
 			</Box>
 		</Flex>
