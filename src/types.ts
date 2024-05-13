@@ -11,3 +11,9 @@ export type LanguageMessage = {
 	en: string;
 	value: string;
 };
+
+export type Todo = {
+	id: number;
+	title: string;
+	finishedAt: string;
+};

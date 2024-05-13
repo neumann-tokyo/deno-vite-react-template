@@ -60,5 +60,5 @@ export function DatetimeFormat({
 		formatType,
 	]);
 
-	return <span>{formattedTime}</span>;
+	return formattedTime;
 }

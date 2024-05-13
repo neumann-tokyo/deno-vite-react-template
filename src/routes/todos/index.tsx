@@ -3,10 +3,9 @@ import {
 	Button,
 	Flex,
 	Heading,
-	ListItem,
+	Spinner,
 	UnorderedList,
 } from "@chakra-ui/react";
-import { Spinner } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { atomWithQuery } from "jotai-tanstack-query";
 import { Else, If, Then } from "react-if";
@@ -15,6 +14,8 @@ import { jwtTokenAtom } from "../../atoms/current-user.ts";
 import { ErrorAlert } from "../../components/error-alert.tsx";
 import { Trans } from "../../components/trans.tsx";
 import { httpClient } from "../../libs/http-client.ts";
+import type { Todo } from "../../types.ts";
+import { TodoListItem } from "./_components/todo-list-item.tsx";
 
 const todosAtom = atomWithQuery((get) => ({
 	queryKey: ["todos"],
@@ -51,7 +52,9 @@ export function TodosIndexPage() {
 				</Then>
 				<Else>
 					<UnorderedList>
-						<ListItem>aaa</ListItem>
+						{(data as Todo[])?.map((todo) => (
+							<TodoListItem todo={todo} key={todo.id} />
+						))}
 					</UnorderedList>
 				</Else>
 			</If>

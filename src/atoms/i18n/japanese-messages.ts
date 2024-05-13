@@ -46,4 +46,8 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 		en: "New",
 		value: "新規作成",
 	},
+	{
+		en: "Title",
+		value: "タイトル",
+	},
 ]);
