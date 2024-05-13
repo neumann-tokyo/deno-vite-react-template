@@ -1,8 +1,9 @@
 import { useAtomValue } from "jotai";
+import { useMemo } from "react";
 import spacetime from "spacetime";
 import { currentUserAtom } from "../atoms/current-user.ts";
 
-export const timeFormat = "{time} {second-pad}s";
+export const timeFormat = "{time} {second}s";
 export const defaultDateFormat = "{month} {date-ordinal} {year}";
 export const defaultDateFormatName = "US (January 1th 2024)";
 export const datetimeFormats = [
@@ -38,10 +39,12 @@ export function DatetimeFormat({
 	children,
 }: { formatType: FormatType; children: string }) {
 	const currentUser = useAtomValue(currentUserAtom);
-	const time = spacetime(children).goto(currentUser?.timezone ?? "Asia/Tokyo");
-	const dateFormat = currentUser?.datetimeFormat ?? defaultDateFormat;
+	const formattedTime = useMemo(() => {
+		const time = spacetime(children).goto(
+			currentUser?.timezone ?? "Asia/Tokyo",
+		);
+		const dateFormat = currentUser?.datetimeFormat ?? defaultDateFormat;
 
-	if (!currentUser?.datetimeFormat) {
 		switch (formatType) {
 			case FormatType.Date:
 				return time.format(dateFormat);
@@ -50,5 +53,12 @@ export function DatetimeFormat({
 			case FormatType.DateTime:
 				return time.format(`${dateFormat} ${timeFormat}`);
 		}
-	}
+	}, [
+		children,
+		currentUser?.timezone,
+		currentUser?.datetimeFormat,
+		formatType,
+	]);
+
+	return <span>{formattedTime}</span>;
 }

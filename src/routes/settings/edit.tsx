@@ -11,9 +11,11 @@ import { useAtom } from "jotai";
 import { atomEffect } from "jotai-effect";
 import { atomWithMutation } from "jotai-tanstack-query";
 import { When } from "react-if";
+import { useLocation } from "wouter";
 import { currentUserAtom, jwtTokenAtom } from "../../atoms/current-user.ts";
 import { datetimeFormats } from "../../components/datetime-format.tsx";
 import { ErrorAlert } from "../../components/error-alert.tsx";
+import { Trans } from "../../components/trans.tsx";
 import { httpClient } from "../../libs/http-client.ts";
 import { DatetimeFormatSelect } from "./_components/datetime-format-select.tsx";
 import { LanguageSelect } from "./_components/language-select.tsx";
@@ -56,6 +58,7 @@ export function SettingsEditPage() {
 	useAtom(settingsEditEffect);
 	const [{ mutate, isPending, isError }] = useAtom(updateCurrentUserAtom);
 	const [currentUser] = useAtom(currentUserAtom);
+	const [_, navigate] = useLocation();
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
@@ -124,11 +127,14 @@ export function SettingsEditPage() {
 							required
 						/>
 					</FormControl>
-					<Box>
+					<Flex gap="0.5rem">
 						<Button colorScheme="blue" type="submit" isLoading={isPending}>
 							Save
 						</Button>
-					</Box>
+						<Button type="button" onClick={() => navigate("/settings")}>
+							<Trans>Back</Trans>
+						</Button>
+					</Flex>
 				</Flex>
 			</form>
 		</Flex>

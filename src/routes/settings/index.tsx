@@ -16,6 +16,7 @@ import { useLocation } from "wouter";
 import { currentUserAtom } from "../../atoms/current-user.ts";
 import { formatName } from "../../components/datetime-format.tsx";
 import { Trans } from "../../components/trans.tsx";
+import { languages } from "./_components/language-select.tsx";
 
 export function SettingsIndexPage() {
 	const { colorMode, toggleColorMode } = useColorMode();
@@ -49,7 +50,13 @@ export function SettingsIndexPage() {
 							<Th>
 								<Trans>Language</Trans>
 							</Th>
-							<Td>{currentUser?.language}</Td>
+							<Td>
+								{
+									languages.find(
+										(lang) => lang.value === currentUser?.language ?? "en_US",
+									)?.label
+								}
+							</Td>
 						</Tr>
 						<Tr>
 							<Th>

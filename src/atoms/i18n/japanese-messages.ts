@@ -34,4 +34,12 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 		en: "Edit Profile",
 		value: "プロフィールを編集する",
 	},
+	{
+		en: "Back",
+		value: "戻る",
+	},
+	{
+		en: "Current time",
+		value: "現在時刻",
+	},
 ]);

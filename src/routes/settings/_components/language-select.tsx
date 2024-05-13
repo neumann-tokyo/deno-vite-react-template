@@ -1,8 +1,8 @@
 import { Select } from "@chakra-ui/react";
 
-const languages = [
+export const languages = [
 	{ value: "en_US", label: "English" },
-	{ value: "ja_JP", label: "Japanese" },
+	{ value: "ja_JP", label: "日本語" },
 ];
 
 export function LanguageSelect(props: any) {

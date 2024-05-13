@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import Select from "react-select";
+import { ReactSelectColorMode } from "../../../components/react-select-color-mode.tsx";
 
 const languages = Intl.supportedValuesOf("timeZone").map((timezone) => ({
 	value: timezone,
@@ -13,6 +13,10 @@ export function TimezoneSelect({ defaultValue, ...props }: any) {
 	);
 
 	return (
-		<Select options={languages} defaultValue={defaultTimezone} {...props} />
+		<ReactSelectColorMode
+			options={languages}
+			defaultValue={defaultTimezone}
+			{...props}
+		/>
 	);
 }
