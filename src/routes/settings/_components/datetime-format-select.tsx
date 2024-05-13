@@ -1,7 +1,7 @@
 import { Select } from "@chakra-ui/react";
 import { datetimeFormats } from "../../../components/datetime-format.tsx";
 
-export function DatetimeFormatSelect({ props }: any) {
+export function DatetimeFormatSelect(props: any) {
 	return (
 		<Select {...props}>
 			{datetimeFormats.map((df) => (

@@ -26,6 +26,7 @@ const updateCurrentUserAtom = atomWithMutation((get) => ({
 		displayName: string;
 		language: string;
 		timezone: string;
+		datetimeFormat: string;
 	}) => {
 		return httpClient({
 			jwtToken: get(jwtTokenAtom),
@@ -64,6 +65,7 @@ export function SettingsEditPage() {
 			displayName: e.target.displayName.value,
 			language: e.target.language.value,
 			timezone: e.target.timezone.value,
+			datetimeFormat: e.target.datetimeFormat.value,
 		});
 	};
 

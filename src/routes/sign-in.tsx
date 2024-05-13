@@ -33,11 +33,9 @@ const signInEffect = atomEffect((get, set) => {
 	}
 
 	const token = (data as any)?.token;
-	const user = (data as any)?.user;
-	if (!error && token && user) {
+	if (!error && token) {
 		Cookies.set("jwt-token", token);
 		set(jwtTokenAtom, token);
-		set(currentUserAtom, user);
 	} else {
 		console.error(error);
 		set(signInErrorAtom, true);
