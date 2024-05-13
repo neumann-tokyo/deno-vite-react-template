@@ -53,7 +53,7 @@ export function SettingsIndexPage() {
 							<Td>
 								{
 									languages.find(
-										(lang) => lang.value === currentUser?.language ?? "en_US",
+										(lang) => lang.value === (currentUser?.language ?? "en_US"),
 									)?.label
 								}
 							</Td>
