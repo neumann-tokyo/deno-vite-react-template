@@ -1,7 +1,6 @@
 import { Flex, Heading, Link } from "@chakra-ui/react";
 import { atom, useAtom, useSetAtom } from "jotai";
 import { atomEffect } from "jotai-effect";
-import { atomWithQuery } from "jotai-tanstack-query";
 import Cookies from "js-cookie";
 import { Redirect, Link as WouterLink, useRoute } from "wouter";
 import { currentUserAtom, jwtTokenAtom } from "./atoms/current-user.ts";

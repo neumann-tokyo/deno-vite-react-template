@@ -42,4 +42,8 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 		en: "Current time",
 		value: "現在時刻",
 	},
+	{
+		en: "New",
+		value: "新規作成",
+	},
 ]);
