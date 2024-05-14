@@ -5,6 +5,7 @@ export type User = {
 	language: string;
 	timezone: string;
 	datetimeFormat: string;
+	permissions: string[];
 };
 
 export type LanguageMessage = {

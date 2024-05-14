@@ -1,23 +1,40 @@
 import { Route, Switch } from "wouter";
+import { usePermission } from "./components/can.tsx";
 import { HomePage } from "./routes/home.tsx";
 import { NotFoundPage } from "./routes/not-found.tsx";
+import { NotPermissionPage } from "./routes/not-permission.tsx";
+import { RolesIndexPage } from "./routes/roles/index.tsx";
 import { SettingsEditPage } from "./routes/settings/edit.tsx";
 import { SettingsIndexPage } from "./routes/settings/index.tsx";
 import { TodosIdEditPage } from "./routes/todos/id/edit.tsx";
-import { TodosIdIndexPage } from "./routes/todos/id/index.tsx";
 import { TodosIndexPage } from "./routes/todos/index.tsx";
 import { TodosNewPage } from "./routes/todos/new.tsx";
 
 export function Routes() {
+	const canTodos = usePermission("todos");
+	const canRoles = usePermission("roles");
+
 	return (
 		<Switch>
 			<Route path="/" component={HomePage} />
-			<Route path="/todos" component={TodosIndexPage} />
-			<Route path="/todos/new" component={TodosNewPage} />
-			<Route path="/todos/:id" component={TodosIdIndexPage} />
-			<Route path="/todos/:id/edit" component={TodosIdEditPage} />
 			<Route path="/settings" component={SettingsIndexPage} />
 			<Route path="/settings/edit" component={SettingsEditPage} />
+			<Route
+				path="/todos"
+				component={canTodos ? TodosIndexPage : NotPermissionPage}
+			/>
+			<Route
+				path="/todos/new"
+				component={canTodos ? TodosNewPage : NotPermissionPage}
+			/>
+			<Route
+				path="/todos/:id/edit"
+				component={canTodos ? TodosIdEditPage : NotPermissionPage}
+			/>
+			<Route
+				path="/roles"
+				component={canRoles ? RolesIndexPage : NotPermissionPage}
+			/>
 			<Route component={NotFoundPage} />
 		</Switch>
 	);

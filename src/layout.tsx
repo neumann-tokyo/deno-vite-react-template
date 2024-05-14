@@ -4,6 +4,7 @@ import { atomEffect } from "jotai-effect";
 import Cookies from "js-cookie";
 import { Redirect, Link as WouterLink, useRoute } from "wouter";
 import { currentUserAtom, jwtTokenAtom } from "./atoms/current-user.ts";
+import { Can } from "./components/can.tsx";
 import { Trans } from "./components/trans.tsx";
 import { httpClient } from "./libs/http-client.ts";
 import { Routes } from "./routes.tsx";
@@ -57,12 +58,19 @@ export function Layout() {
 				<Link as={WouterLink} to="/">
 					Home
 				</Link>
-				<Link as={WouterLink} to="/todos">
-					TODO List
-				</Link>
+				<Can permissionIdentifier="todos">
+					<Link as={WouterLink} to="/todos">
+						TODO List
+					</Link>
+				</Can>
 				<Link as={WouterLink} to="/settings">
 					<Trans>Settings</Trans>
 				</Link>
+				<Can permissionIdentifier="roles">
+					<Link as={WouterLink} to="/roles">
+						<Trans>Roles</Trans>
+					</Link>
+				</Can>
 				<Link onClick={() => signOut(null)}>Sign Out</Link>
 			</Flex>
 			<Flex flex="5">
