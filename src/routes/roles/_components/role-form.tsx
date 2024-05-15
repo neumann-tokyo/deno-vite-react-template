@@ -1,10 +1,8 @@
 import {
-	Box,
 	Button,
 	Flex,
 	FormControl,
 	FormLabel,
-	Heading,
 	Input,
 	NumberDecrementStepper,
 	NumberIncrementStepper,
@@ -41,8 +39,31 @@ const updateRoleAtom = atomWithMutation((get) => ({
 	},
 }));
 
-export function RoleForm({ role }: { role?: Role }) {
-	const [{ mutate, isPending, isSuccess, isError }] = useAtom(updateRoleAtom);
+const createRoleAtom = atomWithMutation((get) => ({
+	mutationKey: ["create-role"],
+	mutationFn: async (data: {
+		identifier: string;
+		displayName: string;
+		description: string;
+		displayOrder: number;
+	}) => {
+		return await httpClient({ jwtToken: get(jwtTokenAtom) })
+			.post("roles", { json: data })
+			.json();
+	},
+	onSuccess: () => {
+		const queryClient = get(queryClientAtom);
+		queryClient.invalidateQueries({ queryKey: ["roles"] });
+	},
+}));
+
+export function RoleForm({
+	role,
+	afterSubmit,
+}: { role?: Role; afterSubmit?: () => void }) {
+	const [{ mutate, isPending, isSuccess, isError }] = useAtom(
+		role ? updateRoleAtom : createRoleAtom,
+	);
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
@@ -53,6 +74,10 @@ export function RoleForm({ role }: { role?: Role }) {
 			description: e.target.description.value,
 			displayOrder: Number(e.target.displayOrder.value),
 		});
+
+		if (afterSubmit) {
+			afterSubmit();
+		}
 	};
 
 	return (

@@ -634,6 +634,7 @@
   "redirects": {
     "https://deno.land/std/path/mod.ts": "https://deno.land/std@0.224.0/path/mod.ts",
     "https://deno.land/x/vite_deno_plugin/mod.ts": "https://deno.land/x/vite_deno_plugin@v0.9.4/mod.ts",
+    "https://esm.sh/v128/@types/react@~18.2/index.d.ts": "https://esm.sh/v128/@types/react@18.2.38/index.d.ts",
     "https://esm.sh/v128/@types/react@~18.2/jsx-runtime~.d.ts": "https://esm.sh/v128/@types/react@18.2.38/jsx-runtime~.d.ts",
     "https://esm.sh/v135/@types/js-cookie@~3.0/index.d.ts": "https://esm.sh/v135/@types/js-cookie@3.0.6/index.d.ts",
     "https://esm.sh/v135/@types/lodash@4.14.202/index": "https://esm.sh/v135/@types/lodash@4.14.202/index~.d.ts"

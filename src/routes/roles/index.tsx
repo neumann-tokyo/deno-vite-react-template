@@ -1,26 +1,28 @@
 import {
 	Flex,
 	Heading,
+	Icon,
+	IconButton,
 	Spinner,
 	Tab,
 	TabList,
 	TabPanel,
 	TabPanels,
 	Tabs,
+	useDisclosure,
 } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { atomEffect } from "jotai-effect";
 import { atomWithQuery } from "jotai-tanstack-query";
+import { MdAddCircleOutline } from "react-icons/md";
 import { Case, Default, Switch } from "react-if";
 import { jwtTokenAtom } from "../../atoms/current-user.ts";
 import { ErrorAlert } from "../../components/error-alert.tsx";
 import { Trans } from "../../components/trans.tsx";
 import { httpClient } from "../../libs/http-client.ts";
-import type {
-	Role,
-	RolePermissions as RolePermissionsType,
-} from "../../types.ts";
+import type { Role } from "../../types.ts";
 import { rolePermissionsAtoms } from "./_atoms/role-permissions-atoms.ts";
+import { RoleNewDrawer } from "./_components/role-new-drawer.tsx";
 import { RolePermissions } from "./_components/role-permissions.tsx";
 
 const rolesAtom = atomWithQuery((get) => ({
@@ -59,6 +61,7 @@ const RolesIndexEffect = atomEffect((get, set) => {
 export function RolesIndexPage() {
 	useAtom(RolesIndexEffect);
 	const [{ data, isPending, isError }] = useAtom(rolesAtom);
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
 		<Flex flexDirection="column">
@@ -74,11 +77,20 @@ export function RolesIndexPage() {
 				</Case>
 				<Default>
 					<Tabs>
-						<TabList>
-							{(data as Role[])?.map((role) => (
-								<Tab key={role.identifier}>{role.displayName}</Tab>
-							))}
-						</TabList>
+						<Flex alignItems="center">
+							<TabList>
+								{(data as Role[])?.map((role) => (
+									<Tab key={role.identifier}>{role.displayName}</Tab>
+								))}
+							</TabList>
+							<IconButton
+								colorScheme="blue"
+								aria-label="add role"
+								size="sm"
+								icon={<Icon as={MdAddCircleOutline} boxSize={6} />}
+								onClick={onOpen}
+							/>
+						</Flex>
 
 						<TabPanels>
 							{(data as Role[])?.map((role) => (
@@ -90,6 +102,7 @@ export function RolesIndexPage() {
 					</Tabs>
 				</Default>
 			</Switch>
+			<RoleNewDrawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
 		</Flex>
 	);
 }
