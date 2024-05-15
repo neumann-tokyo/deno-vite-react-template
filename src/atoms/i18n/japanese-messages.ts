@@ -62,4 +62,6 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 		en: "Permissions Settings",
 		value: "権限設定",
 	},
+	{ en: "Description", value: "説明" },
+	{ en: "Display Order", value: "表示順" },
 ]);

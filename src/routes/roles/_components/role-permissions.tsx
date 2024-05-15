@@ -25,6 +25,7 @@ import {
 	type RolePermissionsAtomType,
 	rolePermissionsAtoms,
 } from "../_atoms/role-permissions-atoms.ts";
+import { RoleForm } from "./role-form.tsx";
 
 const permissionsAtom = atomWithQuery((get) => ({
 	queryKey: ["permissions"],
@@ -94,7 +95,7 @@ export function RolePermissions({ role }: { role: Role }) {
 				<Heading as="h3">
 					<Trans>Roles Settings</Trans>
 				</Heading>
-				<div>TODO form</div>
+				<RoleForm role={role} />
 			</Flex>
 			<Flex flexDirection="column">
 				<Heading as="h3">
