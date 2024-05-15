@@ -1,6 +1,7 @@
 import { Flex, Heading, Link } from "@chakra-ui/react";
 import { atom, useAtom, useSetAtom } from "jotai";
 import { atomEffect } from "jotai-effect";
+import { atomWithQuery } from "jotai-tanstack-query";
 import Cookies from "js-cookie";
 import { Redirect, Link as WouterLink, useRoute } from "wouter";
 import { currentUserAtom, jwtTokenAtom } from "./atoms/current-user.ts";
@@ -17,21 +18,24 @@ const signOutAtom = atom(null, (_get, set, _update) => {
 	Cookies.remove("jwt-token");
 });
 
+const fetchCurrentUserAtom = atomWithQuery((get) => ({
+	queryKey: ["current-user"],
+	queryFn: async () =>
+		await httpClient({ jwtToken: get(jwtTokenAtom) as string })
+			.get("users/me")
+			.json(),
+}));
+
 const jwtTokenEffect = atomEffect((get, set) => {
 	const jwtToken = get(jwtTokenAtom);
 
 	if (jwtToken) {
-		httpClient({ jwtToken })
-			.get("users/me")
-			.then(async (response) => {
-				const data: User = await response.json();
-				set(currentUserAtom, data);
-			})
-			.catch((err) => {
-				set(signOutAtom, null);
-			});
+		const { data, isSuccess } = get(fetchCurrentUserAtom);
+		if (isSuccess) {
+			set(currentUserAtom, data as User);
+		}
 	} else {
-		set(signOutAtom, null);
+		set(currentUserAtom, null);
 	}
 });
 

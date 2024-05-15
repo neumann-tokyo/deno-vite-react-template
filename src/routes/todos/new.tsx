@@ -29,16 +29,17 @@ const createNewTodoAtom = atomWithMutation((get) => ({
 }));
 
 export function TodosNewPage() {
-	const [{ mutate, isPending, isError, status }] = useAtom(createNewTodoAtom);
+	const [{ mutate, isPending, isError, isSuccess }] =
+		useAtom(createNewTodoAtom);
 	const [_, navigate] = useLocation();
 	const [queryClient] = useAtom(queryClientAtom);
 
 	useEffect(() => {
-		if (status === "success") {
+		if (isSuccess) {
 			navigate("/todos");
 			queryClient.invalidateQueries({ queryKey: ["todos"] });
 		}
-	}, [status, navigate, queryClient]);
+	}, [isSuccess, navigate, queryClient]);
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();

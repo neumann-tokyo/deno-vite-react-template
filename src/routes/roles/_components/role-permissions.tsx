@@ -9,7 +9,11 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import { useAtom, useAtomValue } from "jotai";
-import { atomWithQuery } from "jotai-tanstack-query";
+import {
+	atomWithMutation,
+	atomWithQuery,
+	queryClientAtom,
+} from "jotai-tanstack-query";
 import { useMemo } from "react";
 import { Case, Default, Switch } from "react-if";
 import { jwtTokenAtom } from "../../../atoms/current-user.ts";
@@ -28,6 +32,29 @@ const permissionsAtom = atomWithQuery((get) => ({
 		await httpClient({ jwtToken: get(jwtTokenAtom) as string })
 			.get("permissions")
 			.json(),
+}));
+const editPermissionAtom = atomWithMutation((get) => ({
+	mutationKey: ["edit-permission"],
+	mutationFn: async (data: {
+		roleIdentifier: string;
+		permissionIdentifier: string;
+		remove: boolean;
+	}) =>
+		await httpClient({
+			jwtToken: get(jwtTokenAtom),
+		})
+			.post(`roles/${data.roleIdentifier}/edit_permission`, {
+				json: {
+					permissionIdentifier: data.permissionIdentifier,
+					remove: data.remove,
+				},
+			})
+			.json(),
+	onSuccess: (res: any) => {
+		const queryClient = get(queryClientAtom);
+		queryClient.invalidateQueries({ queryKey: ["current-user"] });
+		queryClient.invalidateQueries({ queryKey: ["roles", res?.roleIdentifier] });
+	},
 }));
 
 export function RolePermissions({ role }: { role: Role }) {
@@ -57,6 +84,8 @@ export function RolePermissions({ role }: { role: Role }) {
 			(data as any)?.permissions?.map((p: Permission) => p.identifier) || [],
 		[data],
 	);
+	const [{ mutate, status: editPermissionStatus }] =
+		useAtom(editPermissionAtom);
 
 	return (
 		<Flex flexDirection="column">
@@ -95,7 +124,15 @@ export function RolePermissions({ role }: { role: Role }) {
 											defaultChecked={havingPermissionIdentifiers.includes(
 												permission.identifier,
 											)}
-											// onChange={(e) => {}}
+											onChange={(e) => {
+												e.preventDefault();
+												mutate({
+													roleIdentifier: role.identifier,
+													permissionIdentifier: permission.identifier,
+													remove: !e.target.checked,
+												});
+											}}
+											isDisabled={editPermissionStatus === "pending"}
 										/>
 									</GridItem>
 									<GridItem colSpan={2}>{permission.description}</GridItem>
