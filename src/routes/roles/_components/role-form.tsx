@@ -28,10 +28,9 @@ const updateRoleAtom = atomWithMutation((get) => ({
 		identifier: string;
 		displayName: string;
 		description: string;
-		displayOrder: string;
+		displayOrder: number;
 	}) => {
 		const { identifier: _, ...body } = data;
-		// TODO FIXME 何故かこれがうまく動かない
 		return await httpClient({ jwtToken: get(jwtTokenAtom) })
 			.post(`roles/${data.identifier}/update`, { json: body })
 			.json();
@@ -46,13 +45,13 @@ export function RoleForm({ role }: { role?: Role }) {
 	const [{ mutate, isPending, isSuccess, isError }] = useAtom(updateRoleAtom);
 
 	const onSubmit = (e: any) => {
-		e.preventDefault;
+		e.preventDefault();
 
 		mutate({
 			identifier: e.target.identifier.value,
 			displayName: e.target.displayName.value,
 			description: e.target.description.value,
-			displayOrder: e.target.displayOrder.value,
+			displayOrder: Number(e.target.displayOrder.value),
 		});
 	};
 
