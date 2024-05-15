@@ -18,3 +18,22 @@ export type Todo = {
 	title: string;
 	finishedAt: string;
 };
+
+export type Role = {
+	identifier: string;
+	displayName: string;
+	description: string;
+	displayOrder: number;
+};
+
+export type Permission = {
+	identifier: string;
+	displayName: string;
+	description: string;
+	displayOrder: number;
+};
+
+export type RolePermissions = {
+	role: Role;
+	permissions: Permission[];
+};

@@ -50,4 +50,16 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 		en: "Title",
 		value: "タイトル",
 	},
+	{
+		en: "Roles and Permissions",
+		value: "ロールと権限",
+	},
+	{
+		en: "Roles Settings",
+		value: "ロール設定",
+	},
+	{
+		en: "Permissions Settings",
+		value: "権限設定",
+	},
 ]);
