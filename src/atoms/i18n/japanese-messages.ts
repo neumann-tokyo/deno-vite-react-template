@@ -55,6 +55,10 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 		value: "ロールと権限",
 	},
 	{
+		en: "Roles",
+		value: "ロール",
+	},
+	{
 		en: "Roles Settings",
 		value: "ロール設定",
 	},
@@ -65,4 +69,6 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 	{ en: "Description", value: "説明" },
 	{ en: "Display Order", value: "表示順" },
 	{ en: "Add Role", value: "ロール追加" },
+	{ en: "Users Management", value: "ユーザー管理" },
+	{ en: "Users", value: "ユーザー" },
 ]);

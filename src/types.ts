@@ -6,6 +6,9 @@ export type User = {
 	timezone: string;
 	datetimeFormat: string;
 	permissions: string[];
+	roles?: Array<{
+		roleIdentifier: string;
+	}>;
 };
 
 export type LanguageMessage = {

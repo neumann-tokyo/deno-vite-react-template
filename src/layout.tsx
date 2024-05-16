@@ -70,6 +70,11 @@ export function Layout() {
 				<Link as={WouterLink} to="/settings">
 					<Trans>Settings</Trans>
 				</Link>
+				<Can permissionIdentifier="users_management">
+					<Link as={WouterLink} to="/users">
+						<Trans>Users Management</Trans>
+					</Link>
+				</Can>
 				<Can permissionIdentifier="roles">
 					<Link as={WouterLink} to="/roles">
 						<Trans>Roles</Trans>

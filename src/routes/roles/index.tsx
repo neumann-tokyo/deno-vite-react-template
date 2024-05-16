@@ -16,6 +16,7 @@ import { atomEffect } from "jotai-effect";
 import { atomWithQuery } from "jotai-tanstack-query";
 import { MdAddCircleOutline } from "react-icons/md";
 import { Case, Default, Switch } from "react-if";
+import { rolesAtom } from "../../atoms/api.ts";
 import { jwtTokenAtom } from "../../atoms/current-user.ts";
 import { ErrorAlert } from "../../components/error-alert.tsx";
 import { Trans } from "../../components/trans.tsx";
@@ -24,14 +25,6 @@ import type { Role } from "../../types.ts";
 import { rolePermissionsAtoms } from "./_atoms/role-permissions-atoms.ts";
 import { RoleNewDrawer } from "./_components/role-new-drawer.tsx";
 import { RolePermissions } from "./_components/role-permissions.tsx";
-
-const rolesAtom = atomWithQuery((get) => ({
-	queryKey: ["roles"],
-	queryFn: async () =>
-		await httpClient({ jwtToken: get(jwtTokenAtom) as string })
-			.get("roles")
-			.json(),
-}));
 
 const RolesIndexEffect = atomEffect((get, set) => {
 	const { data, isSuccess } = get(rolesAtom);

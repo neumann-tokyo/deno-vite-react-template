@@ -9,10 +9,12 @@ import { SettingsIndexPage } from "./routes/settings/index.tsx";
 import { TodosIdEditPage } from "./routes/todos/id/edit.tsx";
 import { TodosIndexPage } from "./routes/todos/index.tsx";
 import { TodosNewPage } from "./routes/todos/new.tsx";
+import { UsersIndexPage } from "./routes/users/index.tsx";
 
 export function Routes() {
 	const canTodos = usePermission("todos");
 	const canRoles = usePermission("roles");
+	const canUsersManagement = usePermission("users_management");
 
 	return (
 		<Switch>
@@ -34,6 +36,10 @@ export function Routes() {
 			<Route
 				path="/roles"
 				component={canRoles ? RolesIndexPage : NotPermissionPage}
+			/>
+			<Route
+				path="/users"
+				component={canUsersManagement ? UsersIndexPage : NotPermissionPage}
 			/>
 			<Route component={NotFoundPage} />
 		</Switch>
