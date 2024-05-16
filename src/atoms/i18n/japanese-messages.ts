@@ -71,4 +71,28 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 	{ en: "Add Role", value: "ロール追加" },
 	{ en: "Users Management", value: "ユーザー管理" },
 	{ en: "Users", value: "ユーザー" },
+	{
+		en: "Leave the system",
+		value: "システムから退会する",
+	},
+	{
+		en: "Are you sure? You can't undo this action afterwards.",
+		value: "本当によろしいですか？この操作は取り消すことができません。",
+	},
+	{
+		en: "Leave",
+		value: "退会する",
+	},
+	{
+		en: "Cancel",
+		value: "キャンセル",
+	},
+	{
+		en: "Actions",
+		value: "操作",
+	},
+	{
+		en: "Edit",
+		value: "編集",
+	},
 ]);

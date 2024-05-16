@@ -17,6 +17,7 @@ import { currentUserAtom } from "../../atoms/current-user.ts";
 import { formatName } from "../../components/datetime-format.tsx";
 import { Trans } from "../../components/trans.tsx";
 import { languages } from "./_components/language-select.tsx";
+import { LeaveAlertDialog } from "./_components/leave-alert-dialog.tsx";
 
 export function SettingsIndexPage() {
 	const { colorMode, toggleColorMode } = useColorMode();
@@ -81,6 +82,9 @@ export function SettingsIndexPage() {
 				>
 					<Trans>Edit Profile</Trans>
 				</Button>
+			</Box>
+			<Box>
+				<LeaveAlertDialog />
 			</Box>
 		</Flex>
 	);

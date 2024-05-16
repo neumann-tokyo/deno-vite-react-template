@@ -1,4 +1,5 @@
 import {
+	Button,
 	Checkbox,
 	CheckboxGroup,
 	Flex,
@@ -103,6 +104,9 @@ export function UsersIndexPage() {
 								<Th>
 									<Trans>Roles</Trans>
 								</Th>
+								<Th>
+									<Trans>Actions</Trans>
+								</Th>
 							</Tr>
 						</Thead>
 						<Tbody>
@@ -126,12 +130,23 @@ export function UsersIndexPage() {
 													<Checkbox
 														key={role.identifier}
 														value={role.identifier}
+														isDisabled={role.identifier === "leaved"}
 													>
 														{role.displayName}
 													</Checkbox>
 												))}
 											</Flex>
 										</CheckboxGroup>
+									</Td>
+									<Td>
+										<Button
+											type="button"
+											size="sm"
+											colorScheme="red"
+											onClick={() => alert("WIP")}
+										>
+											<Trans>Edit</Trans>
+										</Button>
 									</Td>
 								</Tr>
 							))}

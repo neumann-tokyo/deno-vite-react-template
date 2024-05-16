@@ -4,19 +4,17 @@ import { atomEffect } from "jotai-effect";
 import { atomWithQuery } from "jotai-tanstack-query";
 import Cookies from "js-cookie";
 import { Redirect, Link as WouterLink, useRoute } from "wouter";
-import { currentUserAtom, jwtTokenAtom } from "./atoms/current-user.ts";
+import {
+	currentUserAtom,
+	jwtTokenAtom,
+	signOutAtom,
+} from "./atoms/current-user.ts";
 import { Can } from "./components/can.tsx";
 import { Trans } from "./components/trans.tsx";
 import { httpClient } from "./libs/http-client.ts";
 import { Routes } from "./routes.tsx";
 import { SignInPage } from "./routes/sign-in.tsx";
 import type { User } from "./types.ts";
-
-const signOutAtom = atom(null, (_get, set, _update) => {
-	set(jwtTokenAtom, undefined);
-	set(currentUserAtom, null);
-	Cookies.remove("jwt-token");
-});
 
 const fetchCurrentUserAtom = atomWithQuery((get) => ({
 	queryKey: ["current-user"],
