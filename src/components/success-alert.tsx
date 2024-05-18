@@ -13,7 +13,13 @@ export function SuccessAlert({
 	title,
 	showSeconds = 5,
 	description,
-}: { title: string; showSeconds?: number; description?: string }) {
+	afterAction,
+}: {
+	title: string;
+	showSeconds?: number;
+	description?: string;
+	afterAction?: () => void;
+}) {
 	const { isRunning, restart } = useTimer({
 		expiryTimestamp: spacetime.now().add(showSeconds, "seconds").toNativeDate(),
 	});
@@ -21,6 +27,12 @@ export function SuccessAlert({
 	useEffect(() => {
 		restart(spacetime.now().add(showSeconds, "seconds").toNativeDate());
 	}, [restart, showSeconds]);
+
+	useEffect(() => {
+		if (!isRunning && afterAction) {
+			afterAction();
+		}
+	}, [afterAction, isRunning]);
 
 	return (
 		<When condition={isRunning}>

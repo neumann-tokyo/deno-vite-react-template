@@ -95,4 +95,40 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 		en: "Edit",
 		value: "編集",
 	},
+	{
+		en: "Invite new user",
+		value: "新しいユーザーを招待する",
+	},
+	{
+		en: "Expired Time",
+		value: "有効期限",
+	},
+	{
+		en: "Generate a new invitation link",
+		value: "新しい招待リンクを生成する",
+	},
+	{
+		en: "Submit",
+		value: "送信",
+	},
+	{
+		en: "Generate",
+		value: "生成",
+	},
+	{
+		en: "Set an expire time",
+		value: "有効期限を設定する",
+	},
+	{
+		en: "Copy",
+		value: "コピー",
+	},
+	{
+		en: "None",
+		value: "なし",
+	},
+	{
+		en: "Delete",
+		value: "削除",
+	},
 ]);

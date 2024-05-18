@@ -40,3 +40,9 @@ export type RolePermissions = {
 	role: Role;
 	permissions: Permission[];
 };
+
+export type Invitation = {
+	identifier: string;
+	expiredAt: string;
+	createdAt: string;
+};
