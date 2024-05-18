@@ -1,8 +1,10 @@
 import {
+	Box,
 	Button,
 	Checkbox,
 	Flex,
 	FormControl,
+	FormHelperText,
 	FormLabel,
 	Input,
 } from "@chakra-ui/react";
@@ -41,23 +43,30 @@ export function EditUserForm({
 						required
 					/>
 				</FormControl>
-				<FormControl>
-					<Checkbox onChange={(e) => setShowPassword(e.target.checked)}>
+				<Box>
+					<Checkbox
+						onChange={(e) => setShowPassword(e.target.checked)}
+						name="showPassword"
+					>
 						<Trans>Change Password</Trans>
 					</Checkbox>
 					<When condition={showPassword}>
-						<>
+						<FormControl>
 							<FormLabel>Password</FormLabel>
 							<Input
-								placeholder="Email"
-								name="email"
-								defaultValue={user?.email}
-								minLength={5}
+								type="password"
+								placeholder="Password"
+								name="password"
+								minLength={8}
+								maxLength={50}
 								required
 							/>
-						</>
+							<FormHelperText>
+								<Trans>Password length is between 8 and 50</Trans>
+							</FormHelperText>
+						</FormControl>
 					</When>
-				</FormControl>
+				</Box>
 				<FormControl>
 					<FormLabel>Display Name</FormLabel>
 					<Input
