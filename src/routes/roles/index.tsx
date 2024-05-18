@@ -95,7 +95,7 @@ export function RolesIndexPage() {
 					</Tabs>
 				</Default>
 			</Switch>
-			<RoleNewDrawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+			<RoleNewDrawer isOpen={isOpen} onClose={onClose} />
 		</Flex>
 	);
 }

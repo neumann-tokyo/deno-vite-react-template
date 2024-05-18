@@ -12,6 +12,7 @@ import {
 	Th,
 	Thead,
 	Tr,
+	useDisclosure,
 } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import {
@@ -19,13 +20,15 @@ import {
 	atomWithQuery,
 	queryClientAtom,
 } from "jotai-tanstack-query";
-import { Case, Default, Switch } from "react-if";
+import { useState } from "react";
+import { Case, Default, Switch, When } from "react-if";
 import { rolesAtom } from "../../atoms/api.ts";
-import { jwtTokenAtom } from "../../atoms/current-user.ts";
+import { currentUserAtom, jwtTokenAtom } from "../../atoms/current-user.ts";
 import { ErrorAlert } from "../../components/error-alert.tsx";
 import { Trans } from "../../components/trans.tsx";
 import { httpClient } from "../../libs/http-client.ts";
 import type { Role, User } from "../../types.ts";
+import { EditUserDrawer } from "./_components/edit-user-drawer.tsx";
 
 const usersAtom = atomWithQuery((get) => ({
 	queryKey: ["users"],
@@ -58,10 +61,27 @@ const updateUsersRoleAtom = atomWithMutation((get) => ({
 	},
 }));
 
+const rejectUserAtom = atomWithMutation((get) => ({
+	mutationKey: ["reject-user"],
+	mutationFn: (data: { userId: number }) =>
+		httpClient({ jwtToken: get(jwtTokenAtom) })
+			.post(`user/${data.userId}/reject`)
+			.json(),
+	onSuccess: () => {
+		const queryClient = get(queryClientAtom);
+		queryClient.invalidateQueries({ queryKey: ["users"] });
+	},
+}));
+
 export function UsersIndexPage() {
+	const [currentUser] = useAtom(currentUserAtom);
 	const [{ data: users, status: usersStatus }] = useAtom(usersAtom);
 	const [{ data: roles, status: rolesStatus }] = useAtom(rolesAtom);
 	const [{ mutate, status: updateStatus }] = useAtom(updateUsersRoleAtom);
+	const [{ mutate: rejectUser, status: rejectUserStatus }] =
+		useAtom(rejectUserAtom);
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
 	const onChangeRoles = (userId: number) => (roles: string[]) => {
 		mutate({
@@ -126,27 +146,83 @@ export function UsersIndexPage() {
 											onChange={onChangeRoles(user.id)}
 										>
 											<Flex gap="1rem">
-												{(roles as Role[])?.map((role) => (
-													<Checkbox
-														key={role.identifier}
-														value={role.identifier}
-														isDisabled={role.identifier === "leaved"}
+												<Switch>
+													<Case
+														condition={
+															!!user.roles?.find(
+																(r) => r.roleIdentifier === "leaved",
+															)
+														}
 													>
-														{role.displayName}
-													</Checkbox>
-												))}
+														<Trans>Leaved</Trans>
+													</Case>
+													<Case
+														condition={
+															!!user.roles?.find(
+																(r) => r.roleIdentifier === "rejected",
+															)
+														}
+													>
+														<Trans>Rejected</Trans>
+													</Case>
+													<Default>
+														{(roles as Role[])
+															?.filter(
+																(r) =>
+																	!(
+																		r.identifier === "leaved" ||
+																		r.identifier === "rejected"
+																	),
+															)
+															?.map((role) => (
+																<Checkbox
+																	key={role.identifier}
+																	value={role.identifier}
+																>
+																	{role.displayName}
+																</Checkbox>
+															))}
+													</Default>
+												</Switch>
 											</Flex>
 										</CheckboxGroup>
 									</Td>
 									<Td>
-										<Button
-											type="button"
-											size="sm"
-											colorScheme="red"
-											onClick={() => alert("WIP")}
-										>
-											<Trans>Edit</Trans>
-										</Button>
+										<Flex gap="0.5rem" alignItems="center">
+											<Button
+												type="button"
+												size="sm"
+												colorScheme="blue"
+												onClick={() => {
+													setSelectedUser(user);
+													onOpen();
+												}}
+											>
+												<Trans>Edit</Trans>
+											</Button>
+											<When
+												condition={
+													!(
+														user.roles?.find(
+															(r) => r.roleIdentifier === "rejected",
+														) || user.id === currentUser?.id
+													)
+												}
+											>
+												<Button
+													type="button"
+													size="sm"
+													colorScheme="red"
+													onClick={() => {
+														if (confirm("Are you sure?")) {
+															rejectUser({ userId: user.id });
+														}
+													}}
+												>
+													<Trans>Reject</Trans>
+												</Button>
+											</When>
+										</Flex>
 									</Td>
 								</Tr>
 							))}
@@ -154,6 +230,15 @@ export function UsersIndexPage() {
 					</Table>
 				</Default>
 			</Switch>
+
+			<When condition={!!selectedUser}>
+				<EditUserDrawer
+					isOpen={isOpen}
+					onClose={onClose}
+					/* biome-ignore lint/style/noNonNullAssertion: off */
+					user={selectedUser!}
+				/>
+			</When>
 		</Flex>
 	);
 }

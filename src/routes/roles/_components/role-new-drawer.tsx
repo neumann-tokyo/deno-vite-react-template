@@ -1,24 +1,19 @@
 import {
-	Button,
 	Drawer,
 	DrawerBody,
 	DrawerCloseButton,
 	DrawerContent,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerOverlay,
-	Input,
 } from "@chakra-ui/react";
 import { Trans } from "../../../components/trans.tsx";
 import { RoleForm } from "./role-form.tsx";
 
 export function RoleNewDrawer({
 	isOpen,
-	onOpen,
 	onClose,
 }: {
 	isOpen: boolean;
-	onOpen: () => void;
 	onClose: () => void;
 }) {
 	return (

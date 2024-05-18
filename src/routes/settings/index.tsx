@@ -15,8 +15,8 @@ import { useAtomValue } from "jotai";
 import { useLocation } from "wouter";
 import { currentUserAtom } from "../../atoms/current-user.ts";
 import { formatName } from "../../components/datetime-format.tsx";
+import { languages } from "../../components/language-select.tsx";
 import { Trans } from "../../components/trans.tsx";
-import { languages } from "./_components/language-select.tsx";
 import { LeaveAlertDialog } from "./_components/leave-alert-dialog.tsx";
 
 export function SettingsIndexPage() {

@@ -1,25 +1,13 @@
-import {
-	Box,
-	Button,
-	Flex,
-	FormControl,
-	FormLabel,
-	Heading,
-	Input,
-} from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { atomEffect } from "jotai-effect";
 import { atomWithMutation } from "jotai-tanstack-query";
 import { When } from "react-if";
 import { useLocation } from "wouter";
 import { currentUserAtom, jwtTokenAtom } from "../../atoms/current-user.ts";
-import { datetimeFormats } from "../../components/datetime-format.tsx";
+import { EditUserForm } from "../../components/edit-user-form.tsx";
 import { ErrorAlert } from "../../components/error-alert.tsx";
-import { Trans } from "../../components/trans.tsx";
 import { httpClient } from "../../libs/http-client.ts";
-import { DatetimeFormatSelect } from "./_components/datetime-format-select.tsx";
-import { LanguageSelect } from "./_components/language-select.tsx";
-import { TimezoneSelect } from "./_components/timezone-select.tsx";
 
 const updateCurrentUserAtom = atomWithMutation((get) => ({
 	mutationKey: ["update-current-user"],
@@ -80,63 +68,12 @@ export function SettingsEditPage() {
 			<When condition={isError}>
 				<ErrorAlert title="Fail to save" />
 			</When>
-			<form onSubmit={onSubmit}>
-				<Flex flexDirection="column" gap="1rem">
-					<FormControl>
-						<FormLabel>Email</FormLabel>
-						<Input
-							placeholder="Email"
-							name="email"
-							defaultValue={currentUser?.email}
-							minLength={5}
-							required
-						/>
-					</FormControl>
-					<FormControl>
-						<FormLabel>Display Name</FormLabel>
-						<Input
-							placeholder="displayName"
-							name="displayName"
-							defaultValue={currentUser?.displayName}
-							maxLength={20}
-							minLength={2}
-							required
-						/>
-					</FormControl>
-					<FormControl>
-						<FormLabel>Language</FormLabel>
-						<LanguageSelect
-							name="language"
-							defaultValue={currentUser?.language ?? "en_US"}
-							required
-						/>
-					</FormControl>
-					<FormControl>
-						<FormLabel>Timezone</FormLabel>
-						<TimezoneSelect
-							name="timezone"
-							defaultValue={currentUser?.timezone ?? "Asia/Tokyo"}
-							required
-						/>
-					</FormControl>
-					<FormControl>
-						<FormLabel>Date Format</FormLabel>
-						<DatetimeFormatSelect
-							name="datetimeFormat"
-							defaultValue={currentUser?.datetimeFormat ?? datetimeFormats[0]}
-							required
-						/>
-					</FormControl>
-					<Flex gap="0.5rem">
-						<Button colorScheme="blue" type="submit" isLoading={isPending}>
-							Save
-						</Button>
-						<Button type="button" onClick={() => navigate("/settings")}>
-							<Trans>Back</Trans>
-						</Button>
-					</Flex>
-				</Flex>
-			</form>
+			<EditUserForm
+				onSubmit={onSubmit}
+				user={currentUser}
+				isLoading={isPending}
+				onBack={() => navigate("/settings")}
+			/>
 		</Flex>
 	);
 }

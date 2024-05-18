@@ -80,9 +80,15 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 		value: "本当によろしいですか？この操作は取り消すことができません。",
 	},
 	{
+		en: "Leaved",
+		value: "退会済み",
+	},
+	{
 		en: "Leave",
 		value: "退会する",
 	},
+	{ en: "Rejected", value: "追放済み" },
+	{ en: "Reject", value: "追放する" },
 	{
 		en: "Cancel",
 		value: "キャンセル",
@@ -130,5 +136,21 @@ export const japaneseMessagesAtom = atom<LanguageMessage[]>([
 	{
 		en: "Delete",
 		value: "削除",
+	},
+	{
+		en: "Invalid invitation token",
+		value: "無効な招待トークン",
+	},
+	{
+		en: "Password length is between 8 and 50",
+		value: "Password は 8 から 50 文字の間で入力してください",
+	},
+	{
+		en: "Edit User",
+		value: "ユーザーを編集する",
+	},
+	{
+		en: "Change Password",
+		value: "パスワードを変更する",
 	},
 ]);

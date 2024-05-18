@@ -1,5 +1,5 @@
 import { Select } from "@chakra-ui/react";
-import { datetimeFormats } from "../../../components/datetime-format.tsx";
+import { datetimeFormats } from "./datetime-format.tsx";
 
 export function DatetimeFormatSelect(props: any) {
 	return (

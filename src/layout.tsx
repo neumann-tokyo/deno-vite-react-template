@@ -1,9 +1,8 @@
 import { Flex, Heading, Link } from "@chakra-ui/react";
-import { atom, useAtom, useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { atomEffect } from "jotai-effect";
 import { atomWithQuery } from "jotai-tanstack-query";
-import Cookies from "js-cookie";
-import { Redirect, Link as WouterLink, useRoute } from "wouter";
+import { Redirect, Link as WouterLink, useLocation } from "wouter";
 import {
 	currentUserAtom,
 	jwtTokenAtom,
@@ -13,7 +12,6 @@ import { Can } from "./components/can.tsx";
 import { Trans } from "./components/trans.tsx";
 import { httpClient } from "./libs/http-client.ts";
 import { Routes } from "./routes.tsx";
-import { SignInPage } from "./routes/sign-in.tsx";
 import type { User } from "./types.ts";
 
 const fetchCurrentUserAtom = atomWithQuery((get) => ({
@@ -37,18 +35,35 @@ const jwtTokenEffect = atomEffect((get, set) => {
 	}
 });
 
+const unauthenticatedPaths = ["^/$", "^/sign_up/.*$"];
+
 export function Layout() {
 	useAtom(jwtTokenEffect);
 	const [jwtToken] = useAtom(jwtTokenAtom);
 	const signOut = useSetAtom(signOutAtom);
-	const [match, _] = useRoute("/");
+	const [location] = useLocation();
 
 	if (jwtToken == null) {
-		if (!match) {
-			return <Redirect to="/" />;
+		console.log(location);
+		const match = unauthenticatedPaths.find((path) =>
+			new RegExp(path).test(location),
+		);
+		if (match) {
+			return (
+				<Flex width="100%" flexDirection="column" alignItems="center">
+					<Flex
+						width="100%"
+						maxWidth="1300px"
+						flexDirection="column"
+						gap="1rem"
+					>
+						<Routes />
+					</Flex>
+				</Flex>
+			);
 		}
 
-		return <SignInPage />;
+		return <Redirect to="/" />;
 	}
 
 	return (

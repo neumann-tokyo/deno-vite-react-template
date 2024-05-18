@@ -21,7 +21,7 @@ const signInErrorAtom = atom<boolean | null>(null);
 const signInPostAtom = atomWithMutation(() => ({
 	mutationKey: ["sign-in"],
 	mutationFn: (data: { email: string; password: string }) => {
-		return httpClient().post("users/sign-in", { json: data }).json();
+		return httpClient().post("users/sign_in", { json: data }).json();
 	},
 }));
 const signInEffect = atomEffect((get, set) => {
@@ -57,50 +57,48 @@ export function SignInPage() {
 	};
 
 	return (
-		<Flex width="100%" flexDirection="column" alignItems="center">
-			<Flex width="100%" maxWidth="1300px" flexDirection="column" gap="1rem">
-				<Heading as="h1" size="2xl">
-					Deno React Template
-				</Heading>
-				<Card variant="outline" width="100%" maxWidth="400px">
-					<CardHeader>
-						<Heading as="h2" size="xl">
-							Sign In
-						</Heading>
-					</CardHeader>
+		<>
+			<Heading as="h1" size="2xl">
+				Deno React Template
+			</Heading>
+			<Card variant="outline" width="100%" maxWidth="400px">
+				<CardHeader>
+					<Heading as="h2" size="xl">
+						Sign In
+					</Heading>
+				</CardHeader>
 
-					<CardBody>
-						<form onSubmit={onSubmit}>
-							<Flex flexDirection="column" gap="1rem">
-								<FormControl>
-									<FormControl>Email</FormControl>
-									<Input
-										type="email"
-										name="email"
-										placeholder="Email"
-										required={true}
-									/>
-								</FormControl>
-								<FormControl>
-									<FormControl>Password</FormControl>
-									<Input
-										type="password"
-										name="password"
-										placeholder="Password"
-										required={true}
-									/>
-								</FormControl>
-								<When condition={signInError === true}>
-									<Text color="tomato">Invalid Email or Password</Text>
-								</When>
-								<Button type="submit" colorScheme="blue" isLoading={isPending}>
-									Sign In
-								</Button>
-							</Flex>
-						</form>
-					</CardBody>
-				</Card>
-			</Flex>
-		</Flex>
+				<CardBody>
+					<form onSubmit={onSubmit}>
+						<Flex flexDirection="column" gap="1rem">
+							<FormControl>
+								<FormControl>Email</FormControl>
+								<Input
+									type="email"
+									name="email"
+									placeholder="Email"
+									required={true}
+								/>
+							</FormControl>
+							<FormControl>
+								<FormControl>Password</FormControl>
+								<Input
+									type="password"
+									name="password"
+									placeholder="Password"
+									required={true}
+								/>
+							</FormControl>
+							<When condition={signInError === true}>
+								<Text color="tomato">Invalid Email or Password</Text>
+							</When>
+							<Button type="submit" colorScheme="blue" isLoading={isPending}>
+								Sign In
+							</Button>
+						</Flex>
+					</form>
+				</CardBody>
+			</Card>
+		</>
 	);
 }

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { ReactSelectColorMode } from "../../../components/react-select-color-mode.tsx";
+import { ReactSelectColorMode } from "./react-select-color-mode.tsx";
 
 const languages = Intl.supportedValuesOf("timeZone").map((timezone) => ({
 	value: timezone,
