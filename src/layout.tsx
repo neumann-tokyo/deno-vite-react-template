@@ -44,7 +44,6 @@ export function Layout() {
 	const [location] = useLocation();
 
 	if (jwtToken == null) {
-		console.log(location);
 		const match = unauthenticatedPaths.find((path) =>
 			new RegExp(path).test(location),
 		);
