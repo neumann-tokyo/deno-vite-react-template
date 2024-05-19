@@ -13,6 +13,7 @@ import {
 	Thead,
 	Tr,
 } from "@chakra-ui/react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useAtom, useAtomValue } from "jotai";
 import {
 	atomWithMutation,
@@ -53,6 +54,7 @@ const createInvitationAtom = atomWithMutation((get) => ({
 }));
 
 export function HomePage() {
+	const [parent] = useAutoAnimate();
 	const jwtToken = useAtomValue(jwtTokenAtom);
 	const queryClient = useAtomValue(queryClientAtom);
 	const currentTime = useMemo(() => new Date(), []);
@@ -157,7 +159,7 @@ export function HomePage() {
 										</Th>
 									</Tr>
 								</Thead>
-								<Tbody>
+								<Tbody ref={parent}>
 									{(data as Invitation[])?.map((invitation) => (
 										<Tr key={invitation.identifier}>
 											<Td>

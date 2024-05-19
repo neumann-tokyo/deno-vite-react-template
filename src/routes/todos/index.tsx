@@ -6,6 +6,7 @@ import {
 	Spinner,
 	UnorderedList,
 } from "@chakra-ui/react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useAtom } from "jotai";
 import { atomWithQuery } from "jotai-tanstack-query";
 import { Else, If, Then } from "react-if";
@@ -28,6 +29,7 @@ const todosAtom = atomWithQuery((get) => ({
 export function TodosIndexPage() {
 	const [{ data, isPending, isError }] = useAtom(todosAtom);
 	const [_location, navigate] = useLocation();
+	const [parent] = useAutoAnimate();
 
 	return (
 		<Flex flexDirection="column" flex="1" gap="1rem">
@@ -51,7 +53,7 @@ export function TodosIndexPage() {
 					</If>
 				</Then>
 				<Else>
-					<UnorderedList>
+					<UnorderedList ref={parent}>
 						{(data as Todo[])?.map((todo) => (
 							<TodoListItem todo={todo} key={todo.id} />
 						))}

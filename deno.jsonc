@@ -23,6 +23,7 @@
 		"@uidotdev/usehooks": "https://esm.sh/@uidotdev/usehooks@2.4.1",
 		"framer-motion": "https://esm.sh/framer-motion@11.0.3",
 		"framer-motion/": "https://esm.sh/framer-motion@11.0.3/",
+		"@formkit/auto-animate/": "https://esm.sh/@formkit/auto-animate@0.8.2/",
 		"fast-printf": "https://esm.sh/fast-printf@1.6.9",
 		"jotai": "https://esm.sh/jotai@2.6.4",
 		"jotai/": "https://esm.sh/jotai@2.6.4/",
