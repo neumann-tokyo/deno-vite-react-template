@@ -64,7 +64,7 @@ export function RolePermissions({ role }: { role: Role }) {
 		() => atoms.find((rpa) => rpa.roleIdentifier === role.identifier),
 		[atoms, role],
 	);
-	const [{ data, isPending, isError }] = found
+	const [{ data, isPending, isError }] = found?.atom
 		? useAtom(found.atom)
 		: ([
 				{
